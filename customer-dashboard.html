@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fruitables - Vegetable Website</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Existing Content -->
+
+    <!-- Login Modal Start -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Modal End -->
+
+    <!-- Dashboard Start -->
+    <div class="container-fluid py-5 mb-5">
+        <div class="container py-5">
+            <h1 class="text-center mb-5">Customer Dashboard</h1>
+            <div class="row mb-4">
+                <div class="col-md-8 mx-auto">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="productSearch" placeholder="Search for products...">
+                        <button class="btn btn-primary" onclick="searchProducts()">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="productList">
+                <!-- Products will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+    <!-- Dashboard End -->
+
+    <!-- Cart Modal Start -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="cartItems">
+                    <!-- Cart items will be dynamically inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="buyNow()">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart Modal End -->
+
+    <!-- Bootstrap and JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        let products = [
+            { id: 1, name: "Broccoli", description: "Fresh organic broccoli.", price: 120, category: "Vegetable", image: "img/vegetable-item-2.jpg" },
+            { id: 2, name: "Pomegranate", description: "Juicy and sweet pomegranates.", price: 400, category: "Fruit", image: "img/anar.jpeg" },
+            { id: 3, name: "Curd", description: "Organic curd from fresh milk.", price: 200, category: "Dairy", image: "img/Curd.jpg" }
+        ];
+
+        let cart = [];
+        let isLoggedIn = false;
+
+        function displayProducts() {
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+            products.forEach(product => {
+                productList.innerHTML += `
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">${product.description}</p>
+                                <p class="card-text"><strong>Rs ${product.price}</strong></p>
+                                <button class="btn btn-primary" onclick="addToCart(${product.id})">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function searchProducts() {
+            const searchQuery = document.getElementById('productSearch').value.toLowerCase();
+            const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchQuery));
+            displayFilteredProducts(filteredProducts);
+        }
+
+        function displayFilteredProducts(filteredProducts) {
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+            filteredProducts.forEach(product => {
+                productList.innerHTML += `
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">${product.description}</p>
+                                <p class="card-text"><strong>Rs ${product.price}</strong></p>
+                                <button class="btn btn-primary" onclick="addToCart(${product.id})">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function addToCart(productId) {
+            if (!isLoggedIn) {
+                $('#loginModal').modal('show');
+                return;
+            }
+            const product = products.find(prod => prod.id === productId);
+            cart.push(product);
+            alert(`${product.name} has been added to your cart.`);
+        }
+
+        function buyNow() {
+            if (!isLoggedIn) {
+                $('#loginModal').modal('show');
+                return;
+            }
+            alert("Proceeding to buy the items in your cart.");
+            // Implement the purchase logic here
+        }
+
+        document.addEventListener('DOMContentLoaded', displayProducts);
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            // Implement actual login logic here
+            if (username === "customer" && password === "password") {
+                isLoggedIn = true;
+                $('#loginModal').modal('hide');
+                alert('Logged in successfully!');
+            } else {
+                alert('Invalid login credentials.');
+            }
+        });
+    </script>
+</body>
+</html>
