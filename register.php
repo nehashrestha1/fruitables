@@ -17,7 +17,7 @@ if (isset($_POST['register'])) {
     if ($role == 'farmer') {
         $farm_proof = $_FILES['farm_proof']['name'];
         $farmer_photo = $_FILES['farmer_photo']['name'];
-        
+
         // Save uploaded files to the server
         if (!move_uploaded_file($_FILES['farm_proof']['tmp_name'], "uploads/" . $farm_proof)) {
             echo "<div class='alert alert-danger'>Failed to upload farm proof.</div>";
@@ -54,8 +54,8 @@ if (isset($_POST['register'])) {
     } else {
         echo "<div class='alert alert-danger'>All fields are required</div>";
         header('Refresh: 2; URL=register.php');
-    }  
+    }
     echo "<meta http-equiv=\"refresh\" content=\"2;URL=login.php\">"; // Redirect to login page after 2 seconds
-    
+
 }
 ?>
