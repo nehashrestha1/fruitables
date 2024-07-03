@@ -18,7 +18,6 @@ if (isset($_SESSION['email'])) {
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
-
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
