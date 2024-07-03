@@ -1,3 +1,7 @@
+<?php 
+require('db.php') ;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -146,7 +150,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="loginForm">
+                    <form action="login.php" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="loginEmail" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="loginEmail" required>
