@@ -1,5 +1,5 @@
 <?php 
-require('db.php') ;
+require('./config/db.php') ;
 ?>
 
 <!DOCTYPE html>
@@ -189,6 +189,10 @@ require('db.php') ;
                                 <label for="registerName" class="form-label">Name</label>
                                 <input type="name" class="form-control" id="registerName" required>
                             </div>
+                            <div class="mb-3">
+                        <label for="registerPhone" class="form-label">Username</label>
+                        <input type="username" class="form-control" id="registerusername" required>
+                    </div>
                             <div class="mb-3">
                                 <label for="registerPhone" class="form-label">Phone</label>
                                 <input type="phone" class="form-control" id="registerPhone" required>
