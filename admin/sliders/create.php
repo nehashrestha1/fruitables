@@ -1,4 +1,4 @@
-<?php require('../layouts/header.php'); ?>
+  <?php require('../layouts/header.php'); ?>
 
 <body>
   <!-- Layout wrapper -->

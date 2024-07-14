@@ -1,9 +1,21 @@
-  =>  Template Name    : Fruitables - Vegetable Website Template
+Fruitable:
 
-  =>  Template Link    : https://htmlcodex.com/vegetable-website-template
+users id | name | username | phone | email | password | role | status | created_at | updated_at
 
-  =>  Template License : https://htmlcodex.com/license (or read the LICENSE.txt file)
+hero * id | top_title | title | status | created_at | updated_at
 
-  =>  Template Author  : HTML Codex
+sliders | carousels id | category_id | image | status | created_at | updated_at
 
-  =>  Author Website   : https://htmlcodex.com
+categories id | title | description | image | status | created_at | updated_at
+
+Products id | title | description | image | price | rating_id | qty | discount | status | created_at | updated_at
+
+ratings id | user_id | product_id | r_number | status | created_at | updated_at
+
+contacts * id | name | email | message | status | created_at | upadted_at
+
+facts * id | icon | title | number | status | created_at | updated_at
+
+settings * id | site_key | site_value | status | created_at | updated_at
+
+files id | title | description | file_link | type | status | created_at | updated_at

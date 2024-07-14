@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="assets/vendor/libs/apex-charts/apex-charts.css" />
 
     <!-- Page CSS -->
-
+    <link rel="stylesheet" href="../assets/css/style.css">
     <!-- Helpers -->
     <script src="assets/vendor/js/helpers.js"></script>
 
@@ -177,14 +177,76 @@
 
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="sliders/create.php" class="menu-link">
+                    <a href="hero/create.php" class="menu-link">
                         <div data-i18n="Without menu">Add Hero</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="sliders/index.php" class="menu-link">
+                    <a href="hero/index.php" class="menu-link">
                         <div data-i18n="Without navbar">Manage Hero</div>
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="heroDropdown">
+        <li><a class="dropdown-item my-2" href="hero/create.php">Create New Item</a></li>
+        <li><a class="dropdown-item my-2" href="hero/edit.php">Edit Item</a></li>
+        <li><a class="dropdown-item my-2" href="hero/delete.php">Delete Item</a></li>
+        <li><a class="dropdown-item my-2" href="hero/show.php">Show Item Details</a></li>
+        <li><a class="dropdown-item my-2" href="hero/index.php">View All Items</a></li>
+    </ul>
+                </li>
+            </ul>
+        </li>
+        <!-- Facts Section -->
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">Fact</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="fact/create.php" class="menu-link">
+                        <div data-i18n="Without menu">Add Fact</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="fact/index.php" class="menu-link">
+                        <div data-i18n="Without navbar">Manage Fact</div>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="FactDropdown">
+        <li><a class="dropdown-item my-2" href="fact/create.php">Add New Fact</a></li>
+        <li><a class="dropdown-item my-2" href="fact/edit.php">Edit Fact</a></li>
+        <li><a class="dropdown-item my-2" href="fact/delete.php">Delete Fact</a></li>
+        <li><a class="dropdown-item my-2" href="fact/show.php">Show Facts</a></li>
+        <li><a class="dropdown-item my-2" href="fact/index.php">View All Fact</a></li>
+    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <!-- settings -->
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">settings</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="settings/create.php" class="menu-link">
+                        <div data-i18n="Without menu">Add Settings</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="settings/index.php" class="menu-link">
+                        <div data-i18n="Without navbar">Manage Settings</div>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+        <li><a class="dropdown-item my-2" href="settings/create.php">Create New Setting</a></li>
+        <li><a class="dropdown-item my-2" href="settings/edit.php">Edit Setting</a></li>
+        <li><a class="dropdown-item my-2" href="settings/delete.php">Delete Setting</a></li>
+        <li><a class="dropdown-item my-2" href="settings/show.php">Show Item Details</a></li>
+        <li><a class="dropdown-item my-2" href="settings/index.php">View All Setting</a></li>
+    </ul>
                 </li>
             </ul>
         </li>
