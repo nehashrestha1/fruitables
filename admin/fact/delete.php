@@ -1,15 +1,12 @@
 <?php
-require_once './models/Fact.php';
+include '../config/db.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
-    $id = $_POST['id'];
+$id = $_GET['id'];
 
-    $factModel = new Fact();
-    if ($factModel->delete($id)) {
-        header("Location: show.php");
-        exit;
-    } else {
-        echo "Error deleting fact!";
-    }
+$sql = "DELETE FROM facts WHERE id=$id";
+if ($conn->query($sql) === TRUE) {
+    header("Location: index.php");
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 ?>

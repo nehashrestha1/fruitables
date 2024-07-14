@@ -1,8 +1,8 @@
 Fruitable:
 
-users id | name | username | phone | email | password | role | status | created_at | updated_at
+users id | name | username | phone | email | password | role | status | created_at | updated_at (done)
 
-hero * id | top_title | title | status | created_at | updated_at
+hero * id | top_title | title | status | created_at | updated_at (done)
 
 sliders | carousels id | category_id | image | status | created_at | updated_at
 

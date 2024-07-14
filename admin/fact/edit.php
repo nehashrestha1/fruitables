@@ -1,48 +1,43 @@
 <?php
-require_once './models/Fact.php';
+include '../config/db.php';
 
-$factModel = new Fact();
+$id = $_GET['id'];
+$sql = "SELECT * FROM facts WHERE id=$id";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $fact = $factModel->getById($id);
-
-    if (!$fact) {
-        echo "Fact not found!";
-        exit;
-    }
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $icon = $_POST['icon'];
     $title = $_POST['title'];
-    $description = $_POST['description'];
+    $number = $_POST['number'];
+    $status = $_POST['status'];
 
-    if ($factModel->update($id, $title, $description)) {
-        header("Location: show.php");
-        exit;
+    $sql = "UPDATE facts SET icon='$icon', title='$title', number='$number', status='$status' WHERE id=$id";
+    if ($conn->query($sql) === TRUE) {
+        header("Location: index.php");
     } else {
-        echo "Error updating fact!";
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
     <title>Edit Fact</title>
 </head>
 <body>
     <h1>Edit Fact</h1>
-    <form method="POST" action="">
-        <input type="hidden" name="id" value="<?php echo $fact['id']; ?>">
-        <label for="title">Title:</label><br>
-        <input type="text" name="title" value="<?php echo htmlspecialchars($fact['title']); ?>" required><br>
-        <label for="description">Description:</label><br>
-        <textarea name="description" required><?php echo htmlspecialchars($fact['description']); ?></textarea><br><br>
-        <input type="submit" value="Update Fact">
+    <form method="POST">
+        <label>Icon: </label>
+        <input type="text" name="icon" value="<?php echo $row['icon']; ?>" required><br>
+        <label>Title: </label>
+        <input type="text" name="title" value="<?php echo $row['title']; ?>" required><br>
+        <label>Number: </label>
+        <input type="number" name="number" value="<?php echo $row['number']; ?>" required><br>
+        <label>Status: </label>
+        <input type="number" name="status" value="<?php echo $row['status']; ?>" required><br>
+        <input type="submit" value="Update">
     </form>
-    <a href="show.php">Back to List</a>
 </body>
 </html>

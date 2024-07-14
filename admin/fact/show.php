@@ -1,30 +1,23 @@
 <?php
-require_once './models/Fact.php';
+include '../config/db.php';
 
-$fact = new Fact();
-$facts = $fact->getAll();
+$id = $_GET['id'];
+$sql = "SELECT * FROM facts WHERE id=$id";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>View Facts</title>
+    <title>Show Fact</title>
 </head>
 <body>
-    <h1>Existing Facts</h1>
-    <?php foreach ($facts as $fact): ?>
-        <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-            <h3><?php echo htmlspecialchars($fact['title']); ?></h3>
-            <p><?php echo nl2br(htmlspecialchars($fact['description'])); ?></p>
-            <form method="POST" action="delete.php" style="display:inline-block;">
-                <input type="hidden" name="id" value="<?php echo $fact['id']; ?>">
-                <input type="submit" value="Delete">
-            </form>
-            <a href="edit.php?id=<?php echo $fact['id']; ?>">Edit</a>
-        </div>
-    <?php endforeach; ?>
-
-    <a href="index.php">Back to Home</a>
+    <h1>Fact Details</h1>
+    <p><strong>Icon:</strong> <?php echo $row['icon']; ?></p>
+    <p><strong>Title:</strong> <?php echo $row['title']; ?></p>
+    <p><strong>Number:</strong> <?php echo $row['number']; ?></p>
+    <p><strong>Status:</strong> <?php echo $row['status']; ?></p>
+    <a href="index.php">Back to list</a>
 </body>
 </html>

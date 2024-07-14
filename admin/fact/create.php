@@ -1,35 +1,38 @@
 <?php
-// require_once '.Fact.php';
+include '../config/db.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $icon = $_POST['icon'];
     $title = $_POST['title'];
-    $description = $_POST['description'];
+    $number = $_POST['number'];
+    $status = $_POST['status'];
 
-    $fact = new Fact();
-    if ($fact->create($title, $description)) {
-        header("Location: show.php");
-        exit;
+    $sql = "INSERT INTO facts (icon, title, number, status) VALUES ('$icon', '$title', '$number', '$status')";
+    if ($conn->query($sql) === TRUE) {
+        header("Location: index.php");
     } else {
-        echo "Error creating fact!";
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>Add New Fact</title>
+    <title>Create Fact</title>
 </head>
 <body>
-    <h1>Add New Fact</h1>
-    <form method="POST" action="">
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title" required><br>
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" required></textarea><br><br>
-        <input type="submit" value="Add Fact">
+    <h1>Create New Fact</h1>
+    <form method="POST">
+        <label>Icon: </label>
+        <input type="text" name="icon" required><br>
+        <label>Title: </label>
+        <input type="text" name="title" required><br>
+        <label>Number: </label>
+        <input type="number" name="number" required><br>
+        <label>Status: </label>
+        <input type="number" name="status" value="1" required><br>
+        <input type="submit" value="Create">
     </form>
-    <a href="index.php">Back to Home</a>
 </body>
 </html>
